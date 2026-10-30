@@ -5521,7 +5521,7 @@ public class HiveConf extends Configuration {
           "|^mapreduce\\.job\\.heap\\.memory-mb\\.ratio$" +
           "|^yarn\\.app\\.mapreduce\\.am\\.resource\\." +
           "|^hive\\.(compactor|mr\\.compactor)\\." +
-          "|^hive\\.(compute|exec|merge|mm|optimize|orc|stats|tez|vectorized)\\." +
+          "|^hive\\.(compute|exec|iceberg|merge|mm|optimize|orc|stats|tez|vectorized)\\." +
           "|^orc\\." +
           "|^tez\\.(am\\.counters|am\\.resource|counters|grouping|task|runtime)\\." +
           "|^(mapreduce\\.job\\.queuename|mapred\\.job\\.queue\\.name|tez\\.queue\\.name)$",
@@ -5538,7 +5538,8 @@ public class HiveConf extends Configuration {
     HIVE_COMPACTOR_CONF_DENYLIST("hive.compactor.conf.denylist",
           "^(fs|hive\\.security|hadoop\\.security)\\.|^tmp(jars|files|archives)$" +
           "|(^|\\.)([^.]*opts|env|classloader|classpath|jars?|files|archives|hooks?|class(es)?|[^.]*class" +
-          "|impl|factory|keytab|principal|credentials[^.]*|log4j[^.]*|provider|encrypt|mask|plugin" +
+          "|impl|factory|keytab|principal|credential[^.]*|[^.]*password[^.]*|[^.]*secret[^.]*|[^.]*token[^.]*" +
+          "|log4j[^.]*|provider|encrypt|mask|plugin" +
           "|whitelist|logger|listeners?|scratchdir|stagingdir|tmp\\.dir|temp\\.dir|input\\.dir|plan|trust" +
           "|params|codecs?|submitviachild|via\\.child|user\\.access|wrapper|script|ssl|tls" +
           "|kryo|publisher|aggregator|table\\.props|is\\.compressed)(\\.|$)",
@@ -7122,6 +7123,9 @@ public class HiveConf extends Configuration {
     restrictList.add(ConfVars.HIVE_CONF_HIDDEN_LIST.varname);
     restrictList.add(ConfVars.HIVE_CONF_INTERNAL_VARIABLE_LIST.varname);
     restrictList.add(ConfVars.HIVE_CONF_LOCKED_LIST.varname);
+    restrictList.add(ConfVars.HIVE_COMPACTOR_CONF_ALLOWLIST.varname);
+    restrictList.add(ConfVars.HIVE_COMPACTOR_CONF_ALLOWLIST_APPEND.varname);
+    restrictList.add(ConfVars.HIVE_COMPACTOR_CONF_DENYLIST.varname);
   }
 
   /**
